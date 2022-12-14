@@ -38,7 +38,7 @@ OrderRoute.post("/:productId",Authentication,async(req,res)=>{
 
 OrderRoute.post("/items",Authentication,async(req,res)=>{
     const userId=req.body.userId;
-    const allproduct=req.body.data;
+    const allproduct=req.body;
     const updated_product=allproduct.map(e=>{
         return {...e,user:userId
         }
