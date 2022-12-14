@@ -39,11 +39,12 @@ OrderRoute.post("/:productId",Authentication,async(req,res)=>{
 OrderRoute.post("/items",Authentication,async(req,res)=>{
     const userId=req.body.userId;
     const allproduct=req.body;
+    console.log("allproduct",allproduct)
     const updated_product=allproduct.map(e=>{
         return {...e,user:userId
         }
     })
-
+console.log("updated",updated_product)
     try{
         await Ordermodel.insertMany([...updated_product])
         res.status(200).send({msg:"Ordered successful"})
