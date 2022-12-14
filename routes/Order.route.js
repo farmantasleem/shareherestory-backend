@@ -34,5 +34,25 @@ OrderRoute.post("/:productId",Authentication,async(req,res)=>{
     }
 })
 
+//inserting many order
+
+OrderRoute.post("/items",Authentication,async(req,res)=>{
+    const userId=req.body.userId;
+    const allproduct=req.body.data;
+    const updated_product=allproduct.map(e=>{
+        return {...e,user:userId
+        }
+    })
+
+    try{
+        await Ordermodel.insertMany([...updated_product])
+        res.status(200).send({msg:"Ordered successful"})
+    }
+    catch(err)
+    {
+        res.status(500).send({"msg":err.message})
+    }
+})
+
 
 module.exports={OrderRoute}
