@@ -44,7 +44,7 @@ OrderRoute.post("/items",Authentication,async(req,res)=>{
         return {...e,user:userId
         }
     })
-console.log("updated",updated_product)
+res.send(updated_product)
     try{
         await Ordermodel.insertMany([...updated_product])
         res.status(200).send({msg:"Ordered successful"})
