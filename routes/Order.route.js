@@ -34,6 +34,22 @@ OrderRoute.post("/:productId",Authentication,async(req,res)=>{
     }
 })
 
+//to create an order 
+OrderRoute.post("/",Authentication,async(req,res)=>{
+    const userId=req.body.userId;
+    
+    try{
+        const allCart=await Cartmodel.find({user:userId});
+   
+        const order_data=await Ordermodel.insertMany(allCart)
+      
+        await Cartmodel.deleteMany({user:userId})
+        res.status(200).send({"msg":"Order Successfull"})
+
+    }catch(err){
+        res.status()
+    }
+})
 //inserting many order
 
 OrderRoute.post("/items",Authentication,async(req,res)=>{
